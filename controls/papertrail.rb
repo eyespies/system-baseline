@@ -17,7 +17,7 @@ papertrail_host = attribute('papertrail_host', default: nil,
 
 control 'papertrail' do
   impact 1.0
-  title 'Papertrail audit configuration'
+  title 'Papertrail central logging configuration'
   desc 'Provides controls to ensure that papertrail remote syslog configuration is accurate'
 
   describe package('rsyslog-gnutls') do

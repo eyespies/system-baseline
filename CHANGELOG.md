@@ -2,6 +2,7 @@
 
 ## 1.1.1
 - Fix incorrect syntax when preventing the papertrail tests from running
+- Update Papertrail test description
 
 ## 1.1.0
 - Add tests for proper configuration of Papertrail remote syslog
