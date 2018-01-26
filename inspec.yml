@@ -1,9 +1,9 @@
-name: linux-core
+name: system-baseline
 title: Core Configuration for Linux Servers
 maintainer: Justin Spies
 copyright: Justin Spies
 copyright_email: justin@thespies.org
-license: Proprietary, All rights reserved
+license: Apache-2.0
 summary: Verifies configuration of core services and components for Linux systems
 version: 1.0.0
 supports:
