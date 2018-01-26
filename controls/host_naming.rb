@@ -1,3 +1,5 @@
+default_domain = attribute('default_domain', default: '', description: 'Default domain used when checking the hostname')
+
 control 'hostname' do
   impact 1.0
   title 'Custom Hostname Configuration'
@@ -18,8 +20,13 @@ control 'hostname' do
   end
 
   hostname = hostfile.content.chomp
-  # This should always have a value in the JSON file since it is specifically testing an override of the default.
-  domain = attributes['system_core']['domain']
+
+  domain = if attributes['system_core'].key?('domain')
+           attributes['system_core']['domain']
+         else
+           # Default if no domain is present in the JSON file
+           default_domain
+         end
 
   # Check the domainname
   describe command('hostname -d') do
