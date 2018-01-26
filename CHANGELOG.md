@@ -1,5 +1,8 @@
 # system-baseline Inspec Tests CHANGELOG
 
+## 1.1.2
+- Fix syntax errors in Papertrail tests
+
 ## 1.1.1
 - Fix incorrect syntax when preventing the papertrail tests from running
 - Update Papertrail test description

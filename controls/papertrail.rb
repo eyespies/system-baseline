@@ -25,21 +25,21 @@ control 'papertrail' do
   end
 
   describe file('/var/spool/rsyslog') do
-    it { should be_director }
+    it { should be_directory }
     it { should be_owned_by('root') }
     it { should be_grouped_into('root') }
     its('mode') { should cmp '0770' }
   end
 
   describe file('/etc/papertrail-bundle.pem') do
-    it { should be_director }
+    it { should exist }
     it { should be_owned_by('root') }
     it { should be_grouped_into('root') }
     its('mode') { should cmp '0644' }
   end
 
   describe file('/etc/rsyslog.d/22-papertrail.conf') do
-    it { should be_director }
+    it { should exist }
     it { should be_owned_by('root') }
     it { should be_grouped_into('root') }
     its('mode') { should cmp '0644' }
