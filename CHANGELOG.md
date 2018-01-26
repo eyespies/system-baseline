@@ -1,5 +1,8 @@
 # system-baseline Inspec Tests CHANGELOG
 
+## 1.1.1
+- Fix incorrect syntax when preventing the papertrail tests from running
+
 ## 1.1.0
 - Add tests for proper configuration of Papertrail remote syslog
 

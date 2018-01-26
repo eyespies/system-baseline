@@ -46,5 +46,5 @@ control 'papertrail' do
     its(:content) { should match(/\*\.\*\s*#{papertrail_host}$/i) }
   end
 
-  not_if { papertrail_host.nil? }
+  only_if { !papertrail_host.nil? }
 end
