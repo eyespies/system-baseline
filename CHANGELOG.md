@@ -1,5 +1,11 @@
 # system-baseline Inspec Tests CHANGELOG
 
+## 1.1.3
+- Fix syntax errors in the YUM repo tests
+- Use newest Rubocop
+- Address RuboCop items
+- Add Overcommit
+
 ## 1.1.2
 - Fix syntax errors in Papertrail tests
 
