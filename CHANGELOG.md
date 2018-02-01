@@ -1,5 +1,8 @@
 # system-baseline Inspec Tests CHANGELOG
 
+## 1.1.4
+- Fix additional issues in the host_naming control
+
 ## 1.1.3
 - Fix syntax errors in the YUM repo tests
 - Use newest Rubocop
