@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'highline', '~> 1.6.0'
 gem 'inspec', '~> 1'
+gem 'overcommit'
 gem 'rack', '1.6.4'
 gem 'rake'
 gem 'rubocop', '~> 0.51.0'

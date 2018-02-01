@@ -34,7 +34,7 @@ control 'sshkeys' do
     its(:content) { should match(/^ssh-(rsa|dsa)\s.*/) }
   end
 
-  %w(id_rsa id_rsa.pub).each do |key_file|
+  %w[id_rsa id_rsa.pub].each do |key_file|
     describe file("/root/.ssh/#{key_file}") do
       it { should exist }
       it { should be_owned_by('root') }

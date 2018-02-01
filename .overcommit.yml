@@ -24,6 +24,8 @@ PreCommit:
     enabled: true
   YamlLint:
     enabled: true
+
+gemfile: Gemfile
 #
 #  TrailingWhitespace:
 #    exclude:

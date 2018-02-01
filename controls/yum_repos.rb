@@ -20,12 +20,12 @@ control 'yum-repositories' do
   # ~ Repo / Package Checks ~ #
   repos = case os.name
           when 'centos', 'redhat'
-            %w(base updates epel)
+            %w[base updates epel]
           when 'oracle'
             if os.release.to_s =~ /^6/
-              %w(public_ol6_latest epel)
+              %w[public_ol6_latest epel]
             elsif os.release.to_s =~ /^7/
-              %w(ol7_base_latest epel)
+              %w[ol7_base_latest epel]
             else
               skip "Unexpected os.family of #{os.family} version #{os.release}"
             end
