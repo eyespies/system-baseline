@@ -22,6 +22,8 @@ PreCommit:
     enabled: true
   XmlLint:
     enabled: true
+  YamlLint:
+    enabled: true
 #
 #  TrailingWhitespace:
 #    exclude:
