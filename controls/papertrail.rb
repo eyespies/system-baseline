@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-papertrail_host = attribute('papertrail_host', default: nil,
-                            description: 'Hostname to be compred when testing that papertrail is properly configured')
+papertrail_host = attribute('papertrail_host',
+                            default: nil,
+                            description: 'Hostname to be compared when testing that papertrail is properly configured')
 
 control 'papertrail' do
   impact 1.0

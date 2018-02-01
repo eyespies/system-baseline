@@ -36,11 +36,11 @@ control 'hostname' do
   hostname = hostfile.content.chomp
 
   domain = if attributes['system_core'].key?('domain')
-           attributes['system_core']['domain']
-         else
-           # Default if no domain is present in the JSON file
-           default_domain
-         end
+             attributes['system_core']['domain']
+           else
+             # Default if no domain is present in the JSON file
+             default_domain
+           end
 
   # Check the domainname
   describe command('hostname -d') do

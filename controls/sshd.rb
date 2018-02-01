@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+# rubocop:disable Metrics/BlockLength
 control 'ssh-daemon' do
   impact 1.0
   title 'Secure Shell Server Daemon'
@@ -20,31 +21,31 @@ control 'ssh-daemon' do
   ciphers = case os.name
             when 'centos', 'redhat', 'oracle'
               if os.release.to_s =~ /^6/
-                %w[aes128-ctr
+                %w(aes128-ctr
                    aes192-ctr
-                   aes256-ctr]
+                   aes256-ctr)
               elsif os.release.to_s =~ /^7/
-                %w[chacha20-poly1305@openssh.com
+                %w(chacha20-poly1305@openssh.com
                    aes128-ctr
                    aes192-ctr
                    aes256-ctr
                    aes128-gcm@openssh.com
-                   aes256-gcm@openssh.com]
+                   aes256-gcm@openssh.com)
               end
             end
 
   macs = case os.name
          when 'centos', 'redhat', 'oracle'
            if os.release.to_s =~ /^6/
-             %w[hmac-sha1
+             %w(hmac-sha1
                 umac-64@openssh.com
                 hmac-ripemd160
                 hmac-sha1-96
                 hmac-sha2-256
                 hmac-sha2-512
-                hmac-ripemd160@openssh.com]
+                hmac-ripemd160@openssh.com)
            elsif os.release.to_s =~ /^7/
-             %w[umac-64-etm@openssh.com
+             %w(umac-64-etm@openssh.com
                 umac-128-etm@openssh.com
                 hmac-sha2-256-etm@openssh.com
                 hmac-sha2-512-etm@openssh.com
@@ -54,7 +55,7 @@ control 'ssh-daemon' do
                 hmac-sha2-256
                 hmac-sha2-512
                 hmac-sha1
-                hmac-sha1-etm@openssh.com]
+                hmac-sha1-etm@openssh.com)
            end
          end
 
