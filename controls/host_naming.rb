@@ -35,7 +35,11 @@ control 'hostname' do
 
   if File.exist?('/etc/hostname')
     hostfile = file('/etc/hostname')
-    hostname = hostfile.content.chomp
+    hostname = if !hostfile.content.nil?
+                 hostfile.content.chomp
+               else
+                 ''
+               end
   else
     hostname = ''
   end
