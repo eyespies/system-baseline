@@ -21,8 +21,24 @@ control 'hostname' do
 
   require 'json'
 
-  attributes = json('/tmp/kitchen/dna.json')
-  hostfile = file('/etc/hostname')
+  if File.exist?('/tmp/kitchen/dna.json')
+    attributes = json('/tmp/kitchen/dna.json')
+    domain = if attributes['system_core'].key?('domain')
+               attributes['system_core']['domain']
+             else
+               # Default if no domain is present in the JSON file
+               default_domain
+             end
+  else
+    domain = default_domain
+  end
+
+  if File.exist?('/etc/hostname')
+    hostfile = file('/etc/hostname')
+    hostname = hostfile.content.chomp
+  else
+    hostname = ''
+  end
 
   describe file('/etc/hosts') do
     it { should exist }
@@ -32,15 +48,6 @@ control 'hostname' do
     # TODO: add matchers
     its(:content) { should match(//i) }
   end
-
-  hostname = hostfile.content.chomp
-
-  domain = if attributes['system_core'].key?('domain')
-             attributes['system_core']['domain']
-           else
-             # Default if no domain is present in the JSON file
-             default_domain
-           end
 
   # Check the domainname
   describe command('hostname -d') do
