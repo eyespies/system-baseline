@@ -27,10 +27,10 @@ control 'yum-repositories' do
             elsif os.release.to_s =~ /^7/
               %w[ol7_base_latest epel]
             else
-              skip "Unexpected os.family of #{os.family} version #{os.release}"
+              %w[]
             end
           else
-            skip "Unexpected os #{os.family} / #{os.name} / #{os.release}"
+            %w[]
           end
 
   repos.each do |repo|
