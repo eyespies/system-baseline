@@ -4,11 +4,14 @@ AllCops:
   - vendor/**/*
   - "*/puppet/Puppetfile"
   - "*/puppet/.tmp/**/*"
-  TargetRubyVersion: 1.9
+  TargetRubyVersion: 2.2
+  DisplayCopNames: true
 Documentation:
   Enabled: false
 AlignParameters:
   Enabled: true
+BlockLength:
+  Max: 50
 HashSyntax:
   Enabled: true
 LineLength:
