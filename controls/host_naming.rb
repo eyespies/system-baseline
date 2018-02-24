@@ -31,8 +31,14 @@ control 'hostname' do
 
   hostfile = file('/etc/hostname')
   hostname = if !hostfile.content.nil?
-               # Include the trailing period here so that the compare doesn't end up with '.example.com' as the comparator
-               "#{hostfile.content.chomp}."
+               if domain.empty?
+                 hostfile.content.chomp
+               else
+                 # Since #{hostname} is concated with #{domain}, the period is needed so that the comparison below
+                 # is myhostname.mydomain.tld and not myhostnamemydomain.tld. If the period where added in the test
+                 # itself and the domain were blank, the test would be 'hostname.' instead of just 'hostname'.
+                 "#{hostfile.content.chomp}."
+               end
              else
                ''
              end

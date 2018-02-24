@@ -1,5 +1,8 @@
 # system-baseline Inspec Tests CHANGELOG
 
+## 1.1.5
+- Fix incorrect hostname test that always looked for _hostname._ instead of just _hostname_
+
 ## 1.1.4
 - Fix additional issues in the host_naming control
 
