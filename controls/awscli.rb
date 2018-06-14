@@ -21,6 +21,8 @@ control 'awscli' do
                   'python-pip'
                 elsif os[:release] =~ /^7/
                   'python2-pip'
+                elsif os[:release] =~ /^18/ || os[:release] =~ /^16/
+                  'python3-pip'
                 end
 
   describe package(pip_package) do
