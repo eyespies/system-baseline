@@ -18,7 +18,7 @@ control 'auditd' do
   desc 'Provides controls to ensure that the auditd service is running'
 
   # TODO: Is this Cent/Oracle/RHEL 7 specific?
-  if os.release.to_s =~ /^7/
+  if os[:release] =~ /^7/ || os[:release] =~ /^1[68]/
     describe processes('auditd') do
       its('entries.length') { should eq 1 }
       its('users') { should cmp 'root' }

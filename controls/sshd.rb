@@ -20,11 +20,11 @@ control 'ssh-daemon' do
 
   ciphers = case os.name
             when 'centos', 'redhat', 'oracle'
-              if os.release.to_s =~ /^6/
+              if os[:release] =~ /^6/
                 %w[aes128-ctr
                    aes192-ctr
                    aes256-ctr]
-              elsif os.release.to_s =~ /^7/
+              elsif os[:release] =~ /^7/
                 %w[chacha20-poly1305@openssh.com
                    aes128-ctr
                    aes192-ctr
@@ -36,7 +36,7 @@ control 'ssh-daemon' do
 
   macs = case os.name
          when 'centos', 'redhat', 'oracle'
-           if os.release.to_s =~ /^6/
+           if os[:release] =~ /^6/
              %w[hmac-sha1
                 umac-64@openssh.com
                 hmac-ripemd160
@@ -44,7 +44,7 @@ control 'ssh-daemon' do
                 hmac-sha2-256
                 hmac-sha2-512
                 hmac-ripemd160@openssh.com]
-           elsif os.release.to_s =~ /^7/
+           elsif os[:release] =~ /^7/
              %w[umac-64-etm@openssh.com
                 umac-128-etm@openssh.com
                 hmac-sha2-256-etm@openssh.com
@@ -59,11 +59,25 @@ control 'ssh-daemon' do
            end
          end
 
+  sshd_file_perms = case os.name
+                    when 'redhat', 'centos', 'oracle'
+                      '0600'
+                    else
+                      '0644'
+                    end
+
+  sftp_subsystem_regex = case os.name
+                         when 'redhat', 'centos', 'oracle'
+                           "Subsystem\s*sftp /usr/libexec/openssh/sftp-server"
+                         else
+                           "Subsystem\s*sftp /usr/lib/openssh/sftp-server"
+                         end
+
   describe file('/etc/ssh/sshd_config') do
     it { should exist }
     it { should be_owned_by 'root' }
     it { should be_grouped_into 'root' }
-    its('mode') { should cmp '0600' }
+    its('mode') { should cmp sshd_file_perms }
     its(:content) { should match(%r{Banner\s*/etc/ssh/banner}i) }
     its(:content) { should match(/LoginGraceTime\s*1m/i) }
     its(:content) { should match(/AllowGroups\s*/i) }
@@ -74,7 +88,7 @@ control 'ssh-daemon' do
     its(:content) { should match(/KerberosAuthentication\s*no/i) }
     its(:content) { should match(/UsePAM\s*yes/i) }
     its(:content) { should match(/X11Forwarding\s*no/i) }
-    its(:content) { should match(%r{Subsystem\s*sftp /usr/libexec/openssh/sftp-server}i) }
+    its(:content) { should match(/#{sftp_subsystem_regex}/i) }
     its(:content) { should match(/Ciphers\s*#{ciphers.join(',')}/i) } unless ciphers.nil?
     its(:content) { should match(/MACs\s*#{macs.join(',')}/i) } unless macs.nil?
 
