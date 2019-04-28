@@ -1,5 +1,8 @@
 # system-baseline Inspec Tests CHANGELOG
 
+## 2.0.1
+- Update sshd control to look for 'Macs' instead of 'MACs'
+
 ## 1.1.5
 - Fix incorrect hostname test that always looked for _hostname._ instead of just _hostname_
 

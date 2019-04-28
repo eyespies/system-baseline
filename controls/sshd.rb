@@ -90,7 +90,7 @@ control 'ssh-daemon' do
     its(:content) { should match(/X11Forwarding\s*no/i) }
     its(:content) { should match(/#{sftp_subsystem_regex}/i) }
     its(:content) { should match(/Ciphers\s*#{ciphers.join(',')}/i) } unless ciphers.nil?
-    its(:content) { should match(/MACs\s*#{macs.join(',')}/i) } unless macs.nil?
+    its(:content) { should match(/Macs\s*#{macs.join(',')}/i) } unless macs.nil?
 
     # How to test file changes based on environmental conditions, e.g.:
     # if File.exist?('/usr/bin/sss_ssh_authorizedkeys') && File.exist?('/etc/ipa/ca.crt')
