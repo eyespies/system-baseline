@@ -40,7 +40,6 @@ control 'ssh-daemon' do
              %w[hmac-sha1
                 umac-64@openssh.com
                 hmac-ripemd160
-                hmac-sha1-96
                 hmac-sha2-256
                 hmac-sha2-512
                 hmac-ripemd160@openssh.com]
