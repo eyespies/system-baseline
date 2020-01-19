@@ -53,12 +53,12 @@ control 'hostname' do
   end
 
   # Check the domainname
-  describe command('hostname -d').chomp do
+  describe command('hostname -d') do
     its(:stdout) { should match(/^#{domain}$/i) }
   end
 
   # Check the hostname
-  describe command('hostname -f').chomp do
+  describe command('hostname -f') do
     its(:stdout) { should match(/^#{hostname}#{domain}$/i) }
   end
 end
