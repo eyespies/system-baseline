@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright (C) 2016 - 2020 Justin Spies
 #
 # Licensed under the Apache License, Version 2.0 (the "License");

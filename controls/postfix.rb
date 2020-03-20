@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright (C) 2016 - 2020 Justin Spies
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -141,3 +143,4 @@ control 'mail' do
     its(:addresses) { should include('127.0.0.1') }
   end
 end
+# rubocop:enable Metrics/BlockLength

@@ -1,32 +1,30 @@
 ---
 AllCops:
   Exclude:
-  - vendor/**/*
-  - "*/puppet/Puppetfile"
-  - "*/puppet/.tmp/**/*"
-  TargetRubyVersion: 2.2
+    - vendor/**/*
+  TargetRubyVersion: 2.6
   DisplayCopNames: true
-Documentation:
-  Enabled: false
-AlignParameters:
+Layout/AlignParameters:
   Enabled: true
-BlockLength:
-  Max: 50
-HashSyntax:
-  Enabled: true
-LineLength:
-  Enabled: false
-EmptyLinesAroundBlockBody:
-  Enabled: false
-MethodLength:
-  Max: 40
-NumericLiterals:
-  MinDigits: 10
-Metrics/BlockLength:
-  Max: 35
-Metrics/CyclomaticComplexity:
-  Max: 10
-Metrics/PerceivedComplexity:
-  Max: 10
 Metrics/AbcSize:
   Max: 30
+Metrics/BlockLength:
+  Max: 50
+Metrics/CyclomaticComplexity:
+  Max: 10
+Metrics/LineLength:
+  Enabled: false
+Metrics/MethodLength:
+  Max: 40
+Metrics/PerceivedComplexity:
+  Max: 10
+Style/Documentation:
+  Enabled: false
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+Style/HashSyntax:
+  Enabled: true
+Style/NumericLiterals:
+  MinDigits: 10
+Style/NumericPredicate:
+  Enabled: false

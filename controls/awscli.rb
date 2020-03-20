@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright (C) 2016 - 2020 Justin Spies
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +23,7 @@ control 'awscli' do
                   'python-pip'
                 elsif os[:release] =~ /^7/
                   'python2-pip'
-                elsif os[:release] =~ /^18/ || os[:release] =~ /^16/
+                elsif os[:release] =~ /^8/ || os[:release] =~ /^18/ || os[:release] =~ /^16/
                   'python3-pip'
                 end
 
