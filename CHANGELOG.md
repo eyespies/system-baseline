@@ -1,5 +1,20 @@
 # system-baseline Inspec Tests CHANGELOG
 
+## 2.1.0
+
+- Justin Spies - (feature) lock to Gems compatible with Chef 15
+- Justin Spies - (feature) support Chrony for NTP
+- Justin Spies - (fix) use new "value" instead of "default"
+- Justin Spies - (fix) only support on RHEL platforms less than 8 since ntpd is removed in RHEL8 and higher
+- Justin Spies - (fix) incorrect namespace
+- Justin Spies - (tidy) rubocop cleanup
+- Justin Spies - (tidy) add YAML start marker
+- Justin Spies - (doc) update copyright
+
+## 2.0.3
+
+- Justin Spies - (fix) cannot "chomp" a class
+
 ## 2.0.2
 
 - Justin Spies - '(fix) remove insecure SSH protocols'
