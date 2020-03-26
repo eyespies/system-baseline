@@ -18,52 +18,54 @@ localhost_only = attribute('listen_localhost_only',
                            default: 'false',
                            description: 'If true, Chrony should only listen on localhost and not expose the serivce to outside systems')
 
-control 'chrony-services' do
-  impact 1.0
-  title 'Chrony - Network Time Protocol Service'
-  desc 'chronyd - the latest time synchronization service'
+if %i[centos redhat oracle].include?(os[:name]) && os[:release] =~ /^8/
+  control 'chrony-services' do
+    impact 1.0
+    title 'Chrony - Network Time Protocol Service'
+    desc 'chronyd - the latest time synchronization service'
 
-  describe file('/etc/chrony.conf') do
-    it { should exist }
-    it { should be_owned_by('root') }
-    it { should be_grouped_into('root') }
-    its('mode') { should cmp '0644' }
-    its(:content) { should match(%r{^logdir /var/log/chrony/i}) }
-    its(:content) { should match(/^pool .* iburst/i) }
-    # its(:content) { should match(/^keyfile \/etc\/chrony.keys/i) }
-  end
-
-  describe file('/etc/chrony.keys') do
-    it { should exist }
-    it { should be_owned_by('root') }
-    it { should be_grouped_into('chrony') }
-    its('mode') { should cmp '0640' }
-  end
-
-  # ~ Listening Ports Checks ~ #
-  # TODO: Can we do listening on specific IPs?
-  # TODO: Add negative testing for things that should NOT be listening
-  describe port('323') do
-    its(:addresses) { should include('127.0.0.1') }
-    if localhost_only == 'true'
-      its(:addresses) { should_not include('0.0.0.0') }
-    else
-      its(:addresses) { should include('0.0.0.0') }
+    describe file('/etc/chrony.conf') do
+      it { should exist }
+      it { should be_owned_by('root') }
+      it { should be_grouped_into('root') }
+      its('mode') { should cmp '0644' }
+      its(:content) { should match(%r{^logdir /var/log/chrony/i}) }
+      its(:content) { should match(/^pool .* iburst/i) }
+      # its(:content) { should match(/^keyfile \/etc\/chrony.keys/i) }
     end
-  end
 
-  # ~ Service Checks ~ #
-  chrony_service = 'chronyd'
+    describe file('/etc/chrony.keys') do
+      it { should exist }
+      it { should be_owned_by('root') }
+      it { should be_grouped_into('chrony') }
+      its('mode') { should cmp '0640' }
+    end
 
-  describe service(chrony_service) do
-    it { should be_enabled }
-    it { should be_running }
-  end
+    # ~ Listening Ports Checks ~ #
+    # TODO: Can we do listening on specific IPs?
+    # TODO: Add negative testing for things that should NOT be listening
+    describe port('323') do
+      its(:addresses) { should include('127.0.0.1') }
+      if localhost_only == 'true'
+        its(:addresses) { should_not include('0.0.0.0') }
+      else
+        its(:addresses) { should include('0.0.0.0') }
+      end
+    end
 
-  # ~ Process Checks ~ #
-  describe processes('chronyd') do
-    # Not currently working for somer reason.
-    its('states') { should include('S') }
-    its('entries.length') { should eq 1 }
+    # ~ Service Checks ~ #
+    chrony_service = 'chronyd'
+
+    describe service(chrony_service) do
+      it { should be_enabled }
+      it { should be_running }
+    end
+
+    # ~ Process Checks ~ #
+    describe processes('chronyd') do
+      # Not currently working for somer reason.
+      its('states') { should include('S') }
+      its('entries.length') { should eq 1 }
+    end
   end
 end

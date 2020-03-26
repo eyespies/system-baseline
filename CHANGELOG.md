@@ -1,5 +1,9 @@
 # system-baseline Inspec Tests CHANGELOG
 
+## 2.1.1
+
+- Justin Spies - (fix) exclude NTP / include Chrony for EL >= 8
+
 ## 2.1.0
 
 - Justin Spies - (feature) lock to Gems compatible with Chef 15
