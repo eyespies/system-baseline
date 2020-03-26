@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-default_domain = attribute('default_domain', default: '', description: 'Default domain used when checking the hostname')
+default_domain = attribute('default_domain', value: '', description: 'Default domain used when checking the hostname')
 
 control 'hostname' do
   impact 1.0
