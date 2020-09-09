@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 papertrail_host = attribute('papertrail_host',
-                            default: nil,
+                            value: nil,
                             description: 'Hostname to be compared when testing that papertrail is properly configured')
 
 control 'papertrail' do
