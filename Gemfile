@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'highline', '~> 1.7.0'
-gem 'inspec', '~> 4.0'
+gem 'inspec', '~> 4.18.0'
 gem 'overcommit', '~> 0.52.0'
 gem 'rack', '2.1.0'
 gem 'rake', '~> 13.0'
