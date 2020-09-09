@@ -15,10 +15,10 @@
 # limitations under the License.
 #
 localhost_only = attribute('listen_localhost_only',
-                           default: 'false',
+                           value: 'false',
                            description: 'If true, Chrony should only listen on localhost and not expose the serivce to outside systems')
 
-if %i[centos redhat oracle].include?(os[:name]) && os[:release] =~ /^8/
+if os.redhat? && os[:release] =~ /^8/
   control 'chrony-services' do
     impact 1.0
     title 'Chrony - Network Time Protocol Service'
@@ -29,7 +29,7 @@ if %i[centos redhat oracle].include?(os[:name]) && os[:release] =~ /^8/
       it { should be_owned_by('root') }
       it { should be_grouped_into('root') }
       its('mode') { should cmp '0644' }
-      its(:content) { should match(%r{^logdir /var/log/chrony/i}) }
+      its(:content) { should match(%r{^logdir /var/log/chrony}i) }
       its(:content) { should match(/^pool .* iburst/i) }
       # its(:content) { should match(/^keyfile \/etc\/chrony.keys/i) }
     end

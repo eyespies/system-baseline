@@ -18,7 +18,7 @@ localhost_only = attribute('listen_localhost_only',
                            value: 'false',
                            description: 'If true, NTP should only listen on localhost and not expose the serivce to outside systems')
 
-if %i[centos redhat oracle].include?(os[:name]) && os[:release] =~ /^[67]/
+if os.redhat? && os[:release] =~ /^[67]/
   control 'ntp-services' do
     impact 1.0
     title 'Network Time Protocol Service'
