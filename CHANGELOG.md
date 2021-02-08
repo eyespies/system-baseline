@@ -1,5 +1,13 @@
 # system-baseline Inspec Tests CHANGELOG
 
+## 2.1.3
+
+- Justin Spies - (fix) properly compare booleans for the NTPD tests
+
+## 2.1.2
+
+- Justin Spies - (fix) properly compare booleans for the Chronyd tests
+
 ## 2.1.1
 
 - Justin Spies - (fix) exclude NTP / include Chrony for EL >= 8

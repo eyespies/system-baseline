@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 localhost_only = attribute('listen_localhost_only',
-                           value: 'false',
+                           value: false,
                            description: 'If true, NTP should only listen on localhost and not expose the serivce to outside systems')
 
 if os.redhat? && os[:release] =~ /^[67]/
@@ -39,7 +39,7 @@ if os.redhat? && os[:release] =~ /^[67]/
     # TODO: Add negative testing for things that should NOT be listening
     describe port('123') do
       its(:addresses) { should include('127.0.0.1') }
-      if localhost_only == 'true'
+      if localhost_only == true
         its(:addresses) { should_not include('0.0.0.0') }
       else
         its(:addresses) { should include('0.0.0.0') }

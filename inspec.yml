@@ -6,7 +6,7 @@ copyright: Justin Spies
 copyright_email: justin@thespies.org
 license: Apache-2.0
 summary: Verifies configuration of core services and components for Linux systems
-version: 2.1.2
+version: 2.1.3
 supports:
   - os-family: redhat
   - os-family: debian
