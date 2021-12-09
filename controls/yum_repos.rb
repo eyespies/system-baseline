@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (C) 2016 - 2020 Justin Spies
+# Copyright:: (C) 2016 - 2020 Justin Spies
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,17 +22,17 @@ control 'yum-repositories' do
   # ~ Repo / Package Checks ~ #
   repos = case os.name
           when 'centos', 'redhat'
-            %w[base updates epel]
+            %w(base updates epel)
           when 'oracle'
-            if os[:release] =~ /^6/
-              %w[public_ol6_latest epel]
-            elsif os[:release] =~ /^7/
-              %w[ol7_base_latest epel]
-            else
-              %w[]
+            case os[:release]
+            when /^7/
+              # The main ones of importance
+              %w(ol7_base_latest ol7_epel_latest ol7_optional_latest ol7_uek6_latest)
+            when /^8/
+              %w(ol8_base_latest ol8_epel_latest ol8_addons_latest ol8_appstream_latest ol8_uek6_latest)
             end
           else
-            %w[]
+            %w()
           end
 
   repos.each do |repo|

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (C) 2016 - 2020 Justin Spies
+# Copyright:: (C) 2016 - 2020 Justin Spies
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,42 +22,27 @@ control 'ssh-daemon' do
 
   ciphers = case os.name
             when 'centos', 'redhat', 'oracle'
-              if os[:release] =~ /^6/
-                %w[aes128-ctr
-                   aes192-ctr
-                   aes256-ctr]
-              elsif os[:release] =~ /^7/
-                %w[chacha20-poly1305@openssh.com
-                   aes128-ctr
-                   aes192-ctr
-                   aes256-ctr
-                   aes128-gcm@openssh.com
-                   aes256-gcm@openssh.com]
-              end
+              %w(chacha20-poly1305@openssh.com
+                 aes128-ctr
+                 aes192-ctr
+                 aes256-ctr
+                 aes128-gcm@openssh.com
+                 aes256-gcm@openssh.com)
             end
 
   macs = case os.name
          when 'centos', 'redhat', 'oracle'
-           if os[:release] =~ /^6/
-             %w[hmac-sha1
-                umac-64@openssh.com
-                hmac-ripemd160
-                hmac-sha2-256
-                hmac-sha2-512
-                hmac-ripemd160@openssh.com]
-           elsif os[:release] =~ /^7/
-             %w[umac-64-etm@openssh.com
-                umac-128-etm@openssh.com
-                hmac-sha2-256-etm@openssh.com
-                hmac-sha2-512-etm@openssh.com
-                hmac-sha1-etm@openssh.com
-                umac-64@openssh.com
-                umac-128@openssh.com
-                hmac-sha2-256
-                hmac-sha2-512
-                hmac-sha1
-                hmac-sha1-etm@openssh.com]
-           end
+           %w(umac-64-etm@openssh.com
+              umac-128-etm@openssh.com
+              hmac-sha2-256-etm@openssh.com
+              hmac-sha2-512-etm@openssh.com
+              hmac-sha1-etm@openssh.com
+              umac-64@openssh.com
+              umac-128@openssh.com
+              hmac-sha2-256
+              hmac-sha2-512
+              hmac-sha1
+              hmac-sha1-etm@openssh.com)
          end
 
   sshd_file_perms = case os.name
@@ -84,7 +69,7 @@ control 'ssh-daemon' do
     its(:content) { should match(/AllowGroups\s*/i) }
     its(:content) { should match(/Protocol\s*2/i) }
     its(:content) { should match(/SyslogFacility\s*AUTHPRIV/i) }
-    its(:content) { should match(%r{HostKey\s*\/etc\/ssh\/ssh_host_(dsa|ecdsa)_key}i) }
+    its(:content) { should match(%r{HostKey\s*/etc/ssh/ssh_host_(dsa|ecdsa)_key}i) }
     its(:content) { should match(/PasswordAuthentication\s*yes/i) }
     its(:content) { should match(/KerberosAuthentication\s*no/i) }
     its(:content) { should match(/UsePAM\s*yes/i) }

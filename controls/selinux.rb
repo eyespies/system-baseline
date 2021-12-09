@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (C) 2016 - 2020 Justin Spies
+# Copyright:: (C) 2016 - 2020 Justin Spies
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,9 +17,14 @@
 control 'secure-linux-services' do
   impact 1.0
   title 'Secure Linux (SELinux)'
-  desc 'TBD'
+  desc 'Ensure SELinux is set to permissive by default'
 
   # ~ Security Checks ~ #
-
-  # Check getenforce and /etc/selinux/???
+  # See https://docs.chef.io/inspec/resources/selinux/ #
+  describe selinux do
+    it { should be_installed }
+    it { should_not be_disabled }
+    it { should_not be_enforcing }
+    it { should be_permissive }
+  end
 end

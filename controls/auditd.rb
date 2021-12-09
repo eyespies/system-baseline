@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (C) 2016 - 2020 Justin Spies
+# Copyright:: (C) 2016 - 2020 Justin Spies
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ control 'auditd' do
   desc 'Provides controls to ensure that the auditd service is running'
 
   # TODO: Is this Cent/Oracle/RHEL 7 specific?
-  if os[:release] =~ /^7/ || os[:release] =~ /^1[68]/
+  if os[:release] =~ /^[78]/ || os[:release] =~ /^(18|20)/
     describe processes('auditd') do
       its('entries.length') { should eq 1 }
       its('users') { should cmp 'root' }

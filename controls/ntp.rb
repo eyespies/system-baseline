@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (C) 2016 - 2020 Justin Spies
+# Copyright:: (C) 2016 - 2020 Justin Spies
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-localhost_only = attribute('listen_localhost_only',
-                           value: false,
-                           description: 'If true, NTP should only listen on localhost and not expose the serivce to outside systems')
+localhost_only = input('listen_localhost_only',
+                       value: false,
+                       description: 'If true, NTP should only listen on localhost and not expose the serivce to outside systems')
 
 if os.redhat? && os[:release] =~ /^[67]/
   control 'ntp-services' do

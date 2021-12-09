@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (C) 2016 - 2020 Justin Spies
+# Copyright:: (C) 2016 - 2020 Justin Spies
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,25 +24,5 @@ control 'sshkeys' do
     it { should be_owned_by('root') }
     it { should be_grouped_into('root') }
     its('mode') { should cmp '0700' }
-  end
-
-  describe file('/root/.ssh/authorized_keys') do
-    it { should exist }
-    it { should be_owned_by('root') }
-    it { should be_grouped_into('root') }
-    its('mode') { should cmp '0600' }
-    # TODO: We could add a command to check the number of lines.
-    its(:size) { should > 0 }
-    its(:content) { should match(/^ssh-(rsa|dsa)\s.*/) }
-  end
-
-  %w[id_rsa id_rsa.pub].each do |key_file|
-    describe file("/root/.ssh/#{key_file}") do
-      it { should exist }
-      it { should be_owned_by('root') }
-      it { should be_grouped_into('root') }
-      its('mode') { should cmp '0600' }
-      its(:size) { should > 0 }
-    end
   end
 end

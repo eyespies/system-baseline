@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (C) 2016 - 2020 Justin Spies
+# Copyright:: (C) 2016 - 2020 Justin Spies
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-default_domain = attribute('default_domain', value: '', description: 'Default domain used when checking the hostname')
+default_domain = input('default_domain', value: '', description: 'Default domain used when checking the hostname')
 
 control 'hostname' do
   impact 1.0
@@ -32,17 +32,15 @@ control 'hostname' do
            end
 
   hostfile = file('/etc/hostname')
-  hostname = if !hostfile.content.nil?
-               if domain.empty?
-                 hostfile.content.chomp
-               else
-                 # Since #{hostname} is concated with #{domain}, the period is needed so that the comparison below
-                 # is myhostname.mydomain.tld and not myhostnamemydomain.tld. If the period where added in the test
-                 # itself and the domain were blank, the test would be 'hostname.' instead of just 'hostname'.
-                 "#{hostfile.content.chomp}."
-               end
-             else
+  hostname = if hostfile.content.nil?
                ''
+             elsif domain.empty?
+               hostfile.content.chomp
+             else
+               # Since #{hostname} is concated with #{domain}, the period is needed so that the comparison below
+               # is myhostname.mydomain.tld and not myhostnamemydomain.tld. If the period where added in the test
+               # itself and the domain were blank, the test would be 'hostname.' instead of just 'hostname'.
+               "#{hostfile.content.chomp}."
              end
 
   describe file('/etc/hosts') do
